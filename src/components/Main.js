@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
-
-// Form
-import { FaPlus } from 'react-icons/fa';
-
-import Tarefas from './tarefas';
-
 import Form from './Form';
+import Tarefas from './Tarefas';
 
 import './Main.css';
 
@@ -17,7 +12,7 @@ export default class Main extends Component {
   };
 
   componentDidMount() {
-    const tarefas = JSON.parse()(localStorage.getItem('tarefas'))
+    const tarefas = JSON.parse(localStorage.getItem('tarefas'));
 
     if (!tarefas) return;
 
@@ -42,7 +37,7 @@ export default class Main extends Component {
 
     const novasTarefas = [...tarefas];
 
-    if(index === -1){
+    if (index === -1) {
       this.setState({
         tarefas: [...novasTarefas, novaTarefa],
         novaTarefa: '',
@@ -57,8 +52,6 @@ export default class Main extends Component {
     }
   }
 
-
-
   handleChange = (e) => {
     this.setState({
       novaTarefa: e.target.value,
@@ -67,6 +60,7 @@ export default class Main extends Component {
 
   handleEdit = (e, index) => {
     const { tarefas } = this.state;
+
     this.setState({
       index,
       novaTarefa: tarefas[index],
@@ -90,17 +84,18 @@ export default class Main extends Component {
       <div className="main">
         <h1>Lista de Tarefas</h1>
 
-      <Form
-        handleSubmit={this.handleSubmit}
-        handleChange={this.handleChange}
-        novaTarefa={novaTarefa}
+        <Form
+          handleSubmit={this.handleSubmit}
+          handleChange={this.handleChange}
+          novaTarefa={novaTarefa}
         />
 
-      <Tarefas
-        tarefas={tarefas}
-        handleEdit={this.handleEdit}
-        handleEdit={this.handleDelete}
-      />
+        <Tarefas
+          tarefas={tarefas}
+          handleEdit={this.handleEdit}
+          handleDelete={this.handleDelete}
+        />
       </div>
     );
-  };
+  }
+}
